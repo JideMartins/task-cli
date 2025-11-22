@@ -13,11 +13,16 @@ def convert_json(json_string):
     return data_dict
 
 
-# update data
+def convert_dictionary(data_dict):
+    data_json = json.dumps(data_dict, indent=4)
+    return data_json
+
+
+# update task
 def update_task(data_json):
     print(data_json)
     data_dict = convert_json(data_json)
-    
+
     id = input("what is the id number: ")
     if str(id) not in data_dict.keys():
         print("id not found")
@@ -30,13 +35,28 @@ def update_task(data_json):
         if u_input == "t":
             data_dict[id]["description"] = input("update task: ")
         elif u_input == "d":
-            data_dict[id]["status"] = input("update status(done, in-progress, todeeeo): ")
+            data_dict[id]["status"] = input(
+                "update status(done, in-progress, todeeeo): "
+            )
         else:
             print("Command not found")
-    
+
     # convert to json
-    data_json = json.dumps(data_dict, indent=4)
-    return data_json
+    return convert_dictionary(data_dict)
+
+
+def delete_task(data_json):
+    print(data_json)
+    data_dict = convert_json(data_json)
+
+    id = input("Enter id: ")
+    try:
+        removed = data_dict.pop(str(id))
+    except KeyError:
+        print("id not found")
+
+    # convert to json
+    return convert_dictionary(data_dict)
 
 
 # add  data
@@ -64,6 +84,7 @@ def base_data():
     return data_json
 
 
-print("=" * 50)
+# print("=" * 50)
 # print(f"Your tasks\n{base_data()}")
-print(f"Your tasks\n{update_task(base_data())}")
+# print(update_task(base_data()))
+print(delete_task(base_data()))
