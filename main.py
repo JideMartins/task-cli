@@ -1,6 +1,10 @@
 from datetime import datetime
 
-tasks = {"ID": 0, "description": "", "status": "todo", "createdAt": "", "updatedAt": ""}
+# Timestamp for now
+def now():
+    return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+tasks = {"ID": 0, "description": "", "status": "todo", "createdAt": now(), "updatedAt": None}
 base_tasks = {}
 print("Get your tasks done!")
 
@@ -11,8 +15,7 @@ def add_task(data):
 
     data["ID"] += 1
     data["description"] = des
-    created_at = datetime.now()
-    data["createdAt"] = created_at.strftime("%d/%m/%Y %H:%M:%S")
+    data["updatedAt"] = now()
 
 
 print(tasks)
@@ -20,7 +23,6 @@ num = 0
 not_done = True
 while not_done:
     add_task(tasks)
-    base_tasks.update(tasks)
 
     user_input = input("Would you like to addmore tasks? y/n: ")
     if user_input.lower() == "y":
@@ -30,4 +32,4 @@ while not_done:
         print("bye")
 
 print("=" * 50)
-print(f"Your tasks\n{base_tasks}")
+print(f"Your tasks\n{tasks}")
