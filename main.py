@@ -1,10 +1,15 @@
 from datetime import datetime
+import json
 
 
 # Timestamp for now
 def now():
     return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
+# JSON handling
+def convert_json(json_string):
+    data_dict = json.loads(json_string)
+    return data_dict
 
 # add  data
 def base_data():
@@ -23,7 +28,11 @@ def base_data():
         if user_input != "y":
             print("bye!")
             break
-    return data
+    
+
+    # convert to json
+    data_json = json.dumps(data, indent=4)
+    return data_json
 
 
 print("=" * 50)
