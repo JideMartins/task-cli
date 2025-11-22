@@ -1,5 +1,6 @@
 from datetime import datetime
 import json
+import os
 
 
 # Timestamp for now
@@ -7,7 +8,7 @@ def now():
     return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
 
-# JSON handling
+# JSON string handling
 def convert_json(json_string):
     data_dict = json.loads(json_string)
     return data_dict
@@ -16,6 +17,12 @@ def convert_json(json_string):
 def convert_dictionary(data_dict):
     data_json = json.dumps(data_dict, indent=4)
     return data_json
+
+# JSON File handling
+def load_json(file):
+    with open("tasks.json") as f:
+        json_string = f.read()
+    return json_string
 
 
 # update task
