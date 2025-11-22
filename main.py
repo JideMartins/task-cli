@@ -1,3 +1,5 @@
+from datetime import datetime
+
 tasks = {"ID": 0, "description": "", "status": "todo", "createdAt": "", "updatedAt": ""}
 base_tasks = {}
 print("Get your tasks done!")
@@ -9,6 +11,8 @@ def add_task(data):
 
     data["ID"] += 1
     data["description"] = des
+    created_at = datetime.now()
+    data["createdAt"] = created_at.strftime("%d/%m/%Y %H:%M:%S")
 
 
 print(tasks)
@@ -17,7 +21,7 @@ not_done = True
 while not_done:
     add_task(tasks)
     base_tasks.update(tasks)
-    
+
     user_input = input("Would you like to addmore tasks? y/n: ")
     if user_input.lower() == "y":
         continue
