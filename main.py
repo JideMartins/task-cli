@@ -1,35 +1,42 @@
 from datetime import datetime
 
+
 # Timestamp for now
 def now():
     return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
 
-tasks = {"ID": 0, "description": "", "status": "todo", "createdAt": now(), "updatedAt": None}
-base_tasks = {}
-print("Get your tasks done!")
+
+# # Add task
+# def add_task(data):
+#     des = input("Input new task: ")
+
+#     data["ID"] += 1
+#     data["description"] = des
 
 
-# Add task
-def add_task(data):
-    des = input("Input new task: ")
-
-    data["ID"] += 1
-    data["description"] = des
-    data["updatedAt"] = now()
+# def update_task(data):
+#     data["updatedAt"] = now()
 
 
-print(tasks)
-num = 0
-not_done = True
-while not_done:
-    add_task(tasks)
+# add  data
+def base_data():
+    data = {}
+    id = 1
 
-    user_input = input("Would you like to addmore tasks? y/n: ")
-    if user_input.lower() == "y":
-        continue
-    else:
-        not_done = False
-        print("bye")
+    task = {"description": "", "status": "todo", "createdAt": now(), "updatedAt": None}
+
+    while True:
+        task["description"] = input("input task: ")
+        task["updatedAt"] = now()
+        data[id] = task
+        id += 1
+        user_input = input("Would you like to addmore tasks? y/n: ")
+
+        if user_input != "y":
+            print("bye!")
+            break
+    return data
+
 
 print("=" * 50)
-print(f"Your tasks\n{tasks}")
+print(f"Your tasks\n{base_data()}")
