@@ -1,12 +1,12 @@
 from argparse import ArgumentParser
-from task_handler import (
+from task_manager import (
     add_task,
     delete_task,
     list_tasks,
     set_status,
     update_task,
 )
-from data_handler import dump_json
+from file_utils import dump_json
 
 # 1. Create parser object
 parser = ArgumentParser(description="CLI to track and manage your tasks")

@@ -1,6 +1,6 @@
 # update task
 import json
-from data_handler import convert_dictionary, dump_json, load_json, convert_json, now
+from file_utils import load_json, convert_json, now
 
 # load data
 data = convert_json(load_json("tasks.json"))
