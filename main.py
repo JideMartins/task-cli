@@ -1,8 +1,6 @@
-import json
-import os
 from argparse import ArgumentParser
-from datetime import datetime
-from data_handler import dump_json, now
+from task_handler import add_task
+from data_handler import dump_json
 
 # 1. Create parser object
 parser = ArgumentParser(description="CLI to track and manage your tasks")
@@ -89,6 +87,10 @@ args = parser.parse_args()
 # Use commands
 if args.subcommand == "add":
     # TODO: Use add function here and create or add to JSON file
+    data_json = add_task(args.description)
+    dump_json("tasks.json", data_json)
+    print("saved succesfully")
+    
     pass
 elif args.subcommand == "update":
     # TODO: Use update function here and update JSON file

@@ -24,9 +24,9 @@ def load_json(json_file):
 
 
 def dump_json(json_file, data_json):
-    with open(json_file, "w") as j_file:
-        j_file.write(data_json)
-        print("saved succesfully")
+    with open(json_file, "w") as f:
+        f.write(data_json)
+        
 
 # Timestamp for now
 def now():

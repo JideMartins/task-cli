@@ -1,6 +1,33 @@
 # update task
 import json
-from data_handler import convert_dictionary, convert_json, now
+from data_handler import convert_dictionary, dump_json, load_json, convert_json, now
+
+# define initial values
+data = load_json("tasks.json")
+
+def add_task(description):
+    # TODO: Read file and open to fetch data
+    # TODO: if not file, create one and read data
+    # if dictionary is empty, start at 1
+    if not data:
+        new_id = 1
+    else:
+        # Get highest existing key and add 1
+        data_keys = map(int, data.keys())
+        new_id = max(data_keys) + 1 
+    data[str(new_id)] = {
+            "description": "",
+            "status": "todo",
+            "createdAt": now(),
+            "updatedAt": now(),
+        }
+    data[str(new_id)]["description"] = description
+    
+    # convert to json
+    data_json = json.dumps(data, indent=4)
+    return data_json
+
+
 
 
 def update_task(data_json):
@@ -66,3 +93,14 @@ def base_data():
     # convert to json
     data_json = json.dumps(data, indent=4)
     return data_json
+
+
+
+
+# print("=" * 50)
+# print(f"Your tasks\n{base_data()}")
+# print(update_task(base_data()))
+
+
+# print(delete_task(base_data()))
+dump_json("tasks.json", base_data())
