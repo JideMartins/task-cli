@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from task_handler import add_task, update_task
+from task_handler import add_task, delete_task, update_task
 from data_handler import dump_json
 
 # 1. Create parser object
@@ -93,7 +93,9 @@ elif args.subcommand == "update":
 
 elif args.subcommand == "delete":
     # TODO: Delete and update JSON file
-    pass
+    data_json = delete_task(args.id)
+    dump_json("tasks.json", data_json)
+
 elif args.subcommand == "mark":
     # TODO: mark files according to options
     pass

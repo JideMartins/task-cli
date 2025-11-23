@@ -69,28 +69,36 @@ def update_task(id, description):
 
     # convert modified dictionary to json
     data_json = json.dumps(data, indent=4)
-    print(f"Task Updated!(ID: {id})")
+    print(f"Task Updated! (ID: {id})")
 
     return data_json
 
 
-def delete_task(data_json):
-    print(data_json)
-    data_dict = convert_json(data_json)
+def delete_task(id):
+    """Deletes a task from the global data structure based on its ID.
 
-    id = input("Enter id: ")
-    try:
-        data_dict.pop(str(id))
-    except KeyError:
-        print("id not found")
+    The function checks if the specified task ID exists in the data. If found,
+    the task is removed. If the ID is not found, an error message is printed
+    and the existing data is returned.
 
-    # convert to json
-    return convert_dictionary(data_dict)
+    Args:
+        id (str): String ID of the task to be deleted (eg "1", "5").
 
+    Returns:
+        str: The updated task data converted into a JSON formatted string.
+             If the task was not found, the original JSON string is returned.
 
-# print("=" * 50)
-# print(f"Your tasks\n{base_data()}")
-# print(update_task(base_data()))
+    Side Effects:
+        Modifies the global 'data' dictionary in memory if a task is deleted.
+    """
+    if id not in data:
+        print(f"Error: Task with ID '{id}' not found")
+        return json.dumps(data, indent=4)  # return current JSON string
 
+    data.pop(str(id))
 
-# print(delete_task(base_data()))
+    # convert to json and return
+    data_json = json.dumps(data, indent=4)
+    print(f"Task Deleted! (ID: {id})")
+
+    return data_json
