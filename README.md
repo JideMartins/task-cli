@@ -3,34 +3,53 @@
 
 **Task CLI** is a simple, lightweight, and cross-platform command-line interface tool for managing your daily to-dos right from your terminal. Stop switching apps—track, update, and organize your tasks with simple commands\!
 
-
+-----
 
 ## 🛠️ Installation
 
 Because Task CLI is packaged using `setuptools`, installation is a breeze using `pip`.
 
-1.  **Clone the Repository:**
+### 1\. Clone the Repository
 
-    ```bash
-    git clone https://github.com/JideMartins/task-cli.git
-    cd task-cli
-    ```
+```bash
+git clone https://github.com/JideMartins/task-cli.git
+cd task-cli
+```
 
-2.  **Activate Environment (Recommended):**
-    For best practice, always install CLI tools in a virtual environment.
+### 2\. Activate Virtual Environment (Crucial Step‼️)
 
-    ```bash
-    python -m venv .venv
-    source .venv/bin/activate  # On macOS/Linux
-    .\.venv\Scripts\activate   # On Windows
-    ```
+For best practice, always install CLI tools in a virtual environment. This step **must** be performed every time you open a new terminal session to run the `tsk` command.
 
-3.  **Install the Application:**
-    Install the package locally using `pip`. This makes the `tsk` command available in your terminal.
+```bash
+# Create the environment
+python -m venv .venv
 
-    ```bash
-    pip install .
-    ```
+# Run the activation script based on your operating system:
+source .venv/bin/activate    # 🐧 For macOS and Linux
+.\.venv\Scripts\activate     # 🪟 For Windows Command Prompt (cmd)
+.\.venv\Scripts\Activate.ps1 # 🪟 For Windows PowerShell
+```
+
+> **Note:** After activation, your terminal prompt should start with `(.venv)`. This confirms that the system can now find the `tsk` executable.
+
+### 3\. Install the Application
+
+Install the package locally using `pip`. This makes the `tsk` command available *within the active virtual environment*.
+
+```bash
+pip install .
+```
+
+### 4\. Verify Installation
+
+After installation, immediately test the command to ensure it's recognized.
+
+```bash
+tsk --help
+```
+
+  * **Expected Result:** The help documentation for the Task CLI is displayed.
+  * **If you get an error like 'tsk' is not recognized:** This means you missed or failed the **Activation Step (Step 2)**. Please run the correct activation command for your OS and try again.
 
 -----
 
