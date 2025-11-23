@@ -129,3 +129,15 @@ def set_status(id, status):
     print(f"Task status set to {status} (ID: {id})")
 
     return data_json
+
+
+def list_tasks():
+    if not data:
+        print("There are no tasks to display:")
+        print("   run add [description] to create new task")
+
+    # list of tasks
+    for id in data:
+        for key, value in data[id].items():
+            print(f"{key:<4}:{value}")
+        print("-" * 30)
