@@ -9,7 +9,7 @@
 
 ## 🛠️ Installation
 
-Because Task CLI is packaged using `setuptools`, installation is a breeze using `pip`.
+Because Task CLI is packaged using `setuptools`, installation is a breeze 😉 using `pip`.
 
 ### 1\. Clone the Repository
 
@@ -133,6 +133,8 @@ The Task CLI is organized into three distinct layers for maintainability and cla
 
 ## 🆘 Getting Help
 
+![Task CLI Demo - Adding, Listing, and Marking Tasks](img/task-cli-help-demo.gif)
+
 The Task CLI application uses Python's `argparse` module, which includes robust, built-in help documentation accessible directly from the command line.
 
 ### 1\. General Help
@@ -140,7 +142,7 @@ The Task CLI application uses Python's `argparse` module, which includes robust,
 To see a list of all available subcommands and a brief description of the tool, run the main command with the standard help flag:
 
 ```bash
-tsk --help    # or task -h
+tsk --help    # or tsk -h
 ```
 
 ### 2\. Subcommand Specific Help
@@ -184,3 +186,57 @@ mutually exclusive arguments:
   -d, --done            Marks task as done
   -i, --inprog          Marks task as in-progress
 ```
+
+---
+
+## 🛡️ Error Handling Overview
+
+The Task CLI is built with layered error handling to prevent data loss and application crashes. It ensures that the application either completes successfully or fails gracefully with a clear message.
+
+| Area of Failure | Handled By | How It's Managed |
+| :--- | :--- | :--- |
+| **Invalid Task ID** | `task_manager.py` | Before any modification (update, delete, mark), the code checks if the `ID` exists. If not, it prints an error message, but crucially, it **returns the original, unchanged data**. This prevents overwriting the file with bad data. |
+| **JSON Corruption** | `file_utils.py` (during loading) | Uses `try...except json.JSONDecodeError`. If your `tasks.json` file is manually corrupted (e.g., missing a comma), the application **halts execution** with a clear, fatal error message instructing the user to fix or delete the file. |
+| **File Access Issues** | `file_utils.py` (during loading) | Uses `try...except OSError`. The app handles permission errors or file system issues by printing the specific error details and **exiting gracefully**. |
+| **Missing File** | `file_utils.py` (during loading) | If `tasks.json` does not exist, the application automatically **creates it** and initializes it with an empty task object (`{}`). |
+
+
+---
+
+## 🛑 Troubleshooting & Error Handling
+
+
+The Task CLI application is designed to handle common issues gracefully, but if you run into problems, check these solutions:
+
+### 1. Command Not Found (`tsk` not recognized)
+
+This error occurs when your terminal cannot locate the `tsk` executable.
+
+* **Error Message (Windows):** `'tsk' is not recognized as the name of a cmdlet...`
+* **Error Message (Linux/Mac):** `tsk: command not found`
+
+**Solution:** You have not activated your virtual environment. You must run the activation script every time you open a new terminal session where you intend to use `tsk`.
+
+| OS/Shell | Activation Command |
+| :--- | :--- |
+| **macOS/Linux** | `source .venv/bin/activate` |
+| **Windows PowerShell** | `.\.venv\Scripts\Activate.ps1` |
+| **Windows cmd** | `.\.venv\Scripts\activate` |
+
+### 2. Task ID Not Found
+
+This happens when you try to update, mark, or delete a task using an ID that does not exist in your current task list.
+
+* **Error Output:** `Error: Task with ID '99' not found`
+
+**Solution:** Always run `tsk list` first to confirm the correct ID of the task you want to modify. The system will safely ignore the command and **not** overwrite your `tasks.json` file.
+
+### 3. Data Corruption (JSON Decode Error)
+
+If you manually edit the `tasks.json` file and introduce a typo (like missing a comma or quote), the application will fail on startup.
+
+* **Error Output:** `FATAL ERROR: The tasks.json file is corrupted or improperly formatted.`
+
+**Solution:**
+1.  **Inspect `tasks.json`:** Open the file and look for obvious syntax errors (check that every task dictionary is separated by a comma).
+2.  **Start Fresh:** If you cannot find the error, **delete the `tasks.json` file**. The application will automatically recreate a fresh, empty file the next time you run a command like `tsk add ...`.
