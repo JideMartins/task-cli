@@ -88,7 +88,6 @@ if args.subcommand == "add":
     dump_json("tasks.json", data_json)
 
 elif args.subcommand == "update":
-    # TODO: Use update function here and update JSON file
     data_json = update_task(args.id, args.description)
     dump_json("tasks.json", data_json)
 
