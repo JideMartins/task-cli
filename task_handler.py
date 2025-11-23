@@ -102,3 +102,36 @@ def delete_task(id):
     print(f"Task Deleted! (ID: {id})")
 
     return data_json
+
+
+# Task status
+def mark_done(id):
+    if id not in data:
+        print(f"Error: Task with ID '{id}' not found")
+        return json.dumps(data, indent=4)  # return current JSON string
+
+    data[id]["status"] = "done"
+    # update timestamp
+    data[id]["updatedAt"] = now()
+
+    # convert modified dictionary to json
+    data_json = json.dumps(data, indent=4)
+    print(f"Task status set to done (ID: {id})")
+
+    return data_json
+
+
+def mark_inprog(id):
+    if id not in data:
+        print(f"Error: Task with ID '{id}' not found")
+        return json.dumps(data, indent=4)  # return current JSON string
+
+    data[id]["status"] = "in-progress"
+    # update timestamp
+    data[id]["updatedAt"] = now()
+
+    # convert modified dictionary to json
+    data_json = json.dumps(data, indent=4)
+    print(f"Task status set to in-progress (ID: {id})")
+
+    return data_json

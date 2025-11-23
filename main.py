@@ -48,17 +48,17 @@ mark_group.add_argument(
     "-d",
     "--done",
     action="store_const",
-    dest="progress",
-    const="DONE",
+    dest="status",
+    const="done",
     help="Marks task as done",
 )
 
 mark_group.add_argument(
     "-i",
-    "--in-progress",
+    "--inprog",
     action="store_const",
-    dest="progress",
-    const="IN-PROGRESS",
+    dest="status",
+    const="in-progress",
     help="Marks task as in-progress",
 )
 # marker ID
@@ -98,7 +98,12 @@ elif args.subcommand == "delete":
 
 elif args.subcommand == "mark":
     # TODO: mark files according to options
-    pass
+    if args.status == "DONE":
+        # mark done
+        pass
+    elif args.status == "IN-PROGRESS":
+        # makr in-prog
+        pass
 elif args.subcommand == "list":
     # TODO: list files
     # TODO: handle logic for optional args
