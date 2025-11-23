@@ -61,6 +61,39 @@ parser_delete.add_argument(
 )
 
 
+# 6. Define 'mark' subcommand
+parser_mark = subparsers.add_parser(
+    "mark",
+    help="Mark task as 'done' or 'in-progress'",
+    argument_default="todo"
+)
+
+# Add mutually exclusive group for marking progress
+mark_group = parser_mark.add_mutually_exclusive_group()
+
+mark_group.add_argument(
+    "-d", "--done",
+    action="store_const",
+    dest="progress",
+    const="DONE",
+    help="Marks task as done"
+)
+
+mark_group.add_argument(
+    "-i", "--in-progress",
+    action="store_const",
+    dest="progress",
+    const="IN-PROGRESS",
+    help="Marks task as in-progress"
+)
+# marker ID
+parser_mark.add_argument(
+    "id",
+    type=str,
+    help="Task ID"
+)
+
+
 
 
 
