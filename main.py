@@ -80,36 +80,27 @@ parser_list.add_argument(
     help="Task progress (optional: todo, done or in-progress). Default shows all."
 )
 
-
-# add  data
-def base_data():
-    data = {}
-    id = 0
-
-    while True:
-        id += 1
-        data[id] = {
-            "description": "",
-            "status": "todo",
-            "createdAt": now(),
-            "updatedAt": None,
-        }
-        data[id]["description"] = input("input task: ")
-        data[id]["updatedAt"] = now()
-        user_input = input("Would you like to addmore tasks? y/n: ")
-        if user_input != "y":
-            print("bye!")
-            break
-
-    # convert to json
-    data_json = json.dumps(data, indent=4)
-    return data_json
+# parse arguments
+args = parser.parse_args()
 
 
-# print("=" * 50)
-# print(f"Your tasks\n{base_data()}")
-# print(update_task(base_data()))
 
 
-# print(delete_task(base_data()))
-dump_json("tasks.json", base_data())
+# Use commands
+if args.subcommand == "add":
+    # TODO: Use add function here and create or add to JSON file
+    pass
+elif args.subcommand == "update":
+    # TODO: Use update function here and update JSON file
+    pass
+elif args.subcommand == "delete":
+    # TODO: Delete and update JSON file
+    pass
+elif args.subcommand == "mark":
+    # TODO: mark files according to options
+    pass
+elif args.subcommand == "list":
+    # TODO: list files
+    # TODO: handle logic for optional args
+    pass
+
