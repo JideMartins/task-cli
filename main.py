@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from task_handler import add_task, delete_task, update_task
+from task_handler import add_task, delete_task, set_status, update_task
 from data_handler import dump_json
 
 # 1. Create parser object
@@ -61,7 +61,7 @@ mark_group.add_argument(
     const="in-progress",
     help="Marks task as in-progress",
 )
-# marker ID
+# mark ID
 parser_mark.add_argument("id", type=str, help="Task ID")
 
 # 7. Define 'list' subcommands
@@ -92,18 +92,14 @@ elif args.subcommand == "update":
     dump_json("tasks.json", data_json)
 
 elif args.subcommand == "delete":
-    # TODO: Delete and update JSON file
     data_json = delete_task(args.id)
     dump_json("tasks.json", data_json)
 
 elif args.subcommand == "mark":
     # TODO: mark files according to options
-    if args.status == "DONE":
-        # mark done
-        pass
-    elif args.status == "IN-PROGRESS":
-        # makr in-prog
-        pass
+    data_json = set_status(args.id, args.status)
+    dump_json("tasks.json", data_json)
+
 elif args.subcommand == "list":
     # TODO: list files
     # TODO: handle logic for optional args
