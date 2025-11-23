@@ -102,7 +102,64 @@ tsk delete 10
 
 The Task CLI is organized into three distinct layers for maintainability and clarity:
 
-  - **`cli.py`**: Handles command-line argument parsing using `argparse` and acts as the entry point (`tsk = cli:main`).
-  - **`task_manager.py`**: Contains the core **business logic** (add, update, delete, set status).
-  - **`file_utils.py`**: Manages data **persistence** (loading and dumping the `tasks.json` file).
-  - **`table.py`**: Handles the clean, formatted display of tasks using the `tabulate` library.
+- **`cli.py`**: Handles command-line argument parsing using `argparse` and acts as the entry point (`tsk = cli:main`).
+- **`task_manager.py`**: Contains the core **business logic** (add, update, delete, set status).
+- **`file_utils.py`**: Manages data **persistence** (loading and dumping the `tasks.json` file).
+- **`table.py`**: Handles the clean, formatted display of tasks using the `tabulate` library.
+
+
+-----
+
+## 🆘 Getting Help
+
+The Task CLI application uses Python's `argparse` module, which includes robust, built-in help documentation accessible directly from the command line.
+
+### 1\. General Help
+
+To see a list of all available subcommands and a brief description of the tool, run the main command with the standard help flag:
+
+```bash
+tsk --help    # or task -h
+```
+
+### 2\. Subcommand Specific Help
+
+To view the required arguments, flags, and options for any specific command (like `add`, `update`, or `mark`), run the subcommand followed by the help flag. This is essential for commands that use arguments like `ID` or status flags.
+
+| Command | Action |
+| :--- | :--- |
+| **Add Help** | Displays the required `description` argument. |
+| **Mark Help** | Displays the mutually exclusive flags (`-d` / `-i`) and the required `ID`. |
+| **List Help** | Displays the optional `status` filter argument and available choices. |
+
+```bash
+# Example 1: Getting help for the 'mark' command
+tsk mark --help
+```
+
+```bash
+# Example 2: Getting help for the 'list' command
+tsk list -h
+```
+
+-----
+
+### 📝 Example Output for `tsk mark --help`
+
+If a user runs the command above, they will see output similar to this:
+
+```
+usage: tsk mark [-h] [-d | -i] id
+
+Mark task as 'done' or 'in-progress' Usage:-d, --done or -i, --inprog
+
+positional arguments:
+  id                    Task ID
+
+options:
+  -h, --help            show this help message and exit
+
+mutually exclusive arguments:
+  -d, --done            Marks task as done
+  -i, --inprog          Marks task as in-progress
+```

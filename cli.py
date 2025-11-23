@@ -1,4 +1,4 @@
-from argparse import ArgumentParser
+from argparse import ArgumentParser, RawTextHelpFormatter
 from table import make_table
 from task_manager import (
     add_task,
@@ -44,6 +44,7 @@ parser_delete.add_argument("id", type=str, help="Task ID")
 # 6. Define 'mark' subcommand
 parser_mark = subparsers.add_parser(
     "mark",
+    formatter_class=RawTextHelpFormatter,
     help="Mark task as 'done' or 'in-progress' Usage:-d, --done or -i, --inprog",
     # argument_default="todo"
 )
