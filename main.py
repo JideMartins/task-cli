@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from task_handler import add_task
+from task_handler import add_task, update_task
 from data_handler import dump_json
 
 # 1. Create parser object
@@ -75,26 +75,23 @@ parser_list.add_argument(
     default="ALL",
     choices=["ALL", "todo", "done", "in-progress"],
     type=str,
-    help="Task progress (optional: todo, done or in-progress). Default shows all."
+    help="Task progress (optional: todo, done or in-progress). Default shows all.",
 )
 
 # parse arguments
 args = parser.parse_args()
 
 
-
-
 # Use commands
 if args.subcommand == "add":
-    # TODO: Use add function here and create or add to JSON file
     data_json = add_task(args.description)
     dump_json("tasks.json", data_json)
-    print("saved succesfully")
-    
-    pass
+
 elif args.subcommand == "update":
     # TODO: Use update function here and update JSON file
-    pass
+    data_json = update_task(args.id, args.description)
+    dump_json("tasks.json", data_json)
+
 elif args.subcommand == "delete":
     # TODO: Delete and update JSON file
     pass
@@ -105,4 +102,3 @@ elif args.subcommand == "list":
     # TODO: list files
     # TODO: handle logic for optional args
     pass
-
