@@ -1,6 +1,8 @@
 [![Roadmap.sh Project](https://img.shields.io/badge/Project-Roadmap.sh-blue.svg)](https://roadmap.sh/projects/task-tracker)
 # 🚀 Task CLI: Command Line Task Management
 
+![Task CLI Demo - Adding, Listing, and Marking Tasks](img/task-cli-demo.gif)
+
 **Task CLI** is a simple, lightweight, and cross-platform command-line interface tool for managing your daily to-dos right from your terminal. Stop switching apps—track, update, and organize your tasks with simple commands\!
 
 -----
