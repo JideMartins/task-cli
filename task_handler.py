@@ -131,31 +131,39 @@ def set_status(id, status):
     return data_json
 
 
-def list_tasks():
-    if not data:
-        print("There are no tasks to display:")
-        print("   run add [description] to create new task")
-        return  # stop execution if there are no tasks
+def list_tasks(status_filter="ALL"):
+    """
+    Lists tasks, optionally filtered by status (todo, done, in-progress).
 
-    for id, task_details in data.items():
-        print(f"Task ID: {id}")
-
-        # Iterate over task_details dictionary
-
-        for key, value in task_details.items():
-            print(f"  {key:>12}: {value}")
-        print("-" * 40)
-
-
-def filter_task(status):
+    Args:
+        status_filter (str): The status to filter by, or "ALL" to list everything.
+    """
     if not data:
         print("There are no tasks to display:")
         print("   run add [description] to create new task")
         return
-    for id, task_details in data.items():
-        print(f"Task ID: {id}")
 
-    for key, value in task_details.items():
-        if task_details["status"] == status:
-            print(f"  {key:>12}: {value}")
-        print("-" * 40)
+    tasks_shown = 0
+
+    for id, task_details in data.items():
+        task_status = task_details.get("status")
+
+        # Filtering Logic: Only proceed if the task matches the filter or if filter is "ALL"
+        if status_filter == "ALL" or task_status == status_filter:
+
+            # --- START of Display Block  ---
+            print(f"Task ID: {id}")
+            if status_filter != "ALL":
+                print(f"--- Filter: {status_filter.upper()} ---")
+
+            # Iterate over task_details dictionary
+            # This loop ONLY runs if the task passed the filter check
+            for key, value in task_details.items():
+                print(f"  {key:<12}: {value}")
+
+            print("-" * 40)
+            tasks_shown += 1
+            # --- END of Display Block ---
+
+    if tasks_shown == 0 and status_filter != "ALL":
+        print(f"No tasks found with status: {status_filter}")
