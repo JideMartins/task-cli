@@ -1,8 +1,58 @@
-from datetime import datetime
 import json
 import os
-
+from argparse import ArgumentParser
+from datetime import datetime
 from data_handler import dump_json, now
+
+# 1. Create parser object
+parser = ArgumentParser(description="CLI to track and manage your tasks")
+
+# 2. Add Subparser Container
+subparsers = parser.add_subparsers(
+    dest='subcommand',
+    required='True',
+    help='Sub-command help'
+)
+
+
+# 3. Add subcommand
+parsers_add = subparsers.add_parser(
+    'add',
+    help="Adds task with description given"
+)
+
+# argument specific to 'add' subcommand
+parsers_add.add_argument(
+    "description",
+    type=str,
+    help='Short description of task'
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
