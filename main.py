@@ -37,7 +37,7 @@ parser_delete.add_argument("id", type=str, help="Task ID")
 # 6. Define 'mark' subcommand
 parser_mark = subparsers.add_parser(
     "mark",
-    help="Mark task as 'done' or 'in-progress'",
+    help="Mark task as 'done' or 'in-progress' Usage:-d, --done or -i, --inprog",
     # argument_default="todo"
 )
 
