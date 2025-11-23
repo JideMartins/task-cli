@@ -18,11 +18,21 @@ def convert_dictionary(data_dict):
     data_json = json.dumps(data_dict, indent=4)
     return data_json
 
+
 # JSON File handling
-def load_json(file):
-    with open("tasks.json") as f:
+def load_json(json_file):
+    if not os.path.exists(json_file):
+        with open(json_file, "w"):
+            pass
+    with open(json_file) as f:
         json_string = f.read()
     return json_string
+
+
+def dump_json(json_file, data_json):
+    with open(json_file, "w") as j_file:
+        j_file.write(data_json)
+        print("saved succesfully")
 
 
 # update task
@@ -58,7 +68,7 @@ def delete_task(data_json):
 
     id = input("Enter id: ")
     try:
-        removed = data_dict.pop(str(id))
+        data_dict.pop(str(id))
     except KeyError:
         print("id not found")
 
@@ -94,4 +104,7 @@ def base_data():
 # print("=" * 50)
 # print(f"Your tasks\n{base_data()}")
 # print(update_task(base_data()))
-print(delete_task(base_data()))
+
+
+# print(delete_task(base_data()))
+dump_json("tasks.json", base_data())
