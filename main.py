@@ -2,78 +2,9 @@ from datetime import datetime
 import json
 import os
 
-
-# Timestamp for now
-def now():
-    return datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+from data_handler import dump_json, now
 
 
-# JSON string handling
-def convert_json(json_string):
-    data_dict = json.loads(json_string)
-    return data_dict
-
-
-def convert_dictionary(data_dict):
-    data_json = json.dumps(data_dict, indent=4)
-    return data_json
-
-
-# JSON File handling
-def load_json(json_file):
-    if not os.path.exists(json_file):
-        with open(json_file, "w"):
-            pass
-    with open(json_file) as f:
-        json_string = f.read()
-    return json_string
-
-
-def dump_json(json_file, data_json):
-    with open(json_file, "w") as j_file:
-        j_file.write(data_json)
-        print("saved succesfully")
-
-
-# update task
-def update_task(data_json):
-    print(data_json)
-    data_dict = convert_json(data_json)
-
-    id = input("what is the id number: ")
-    if str(id) not in data_dict.keys():
-        print("id not found")
-        print(data_dict)
-
-    else:
-        u_input = input(
-            "what would you like to update?\nt for task\ns for status: "
-        ).lower()
-        if u_input == "t":
-            data_dict[id]["description"] = input("update task: ")
-        elif u_input == "d":
-            data_dict[id]["status"] = input(
-                "update status(done, in-progress, todeeeo): "
-            )
-        else:
-            print("Command not found")
-
-    # convert to json
-    return convert_dictionary(data_dict)
-
-
-def delete_task(data_json):
-    print(data_json)
-    data_dict = convert_json(data_json)
-
-    id = input("Enter id: ")
-    try:
-        data_dict.pop(str(id))
-    except KeyError:
-        print("id not found")
-
-    # convert to json
-    return convert_dictionary(data_dict)
 
 
 # add  data
