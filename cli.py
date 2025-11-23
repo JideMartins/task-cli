@@ -1,4 +1,5 @@
 from argparse import ArgumentParser
+from table import make_table
 from task_manager import (
     add_task,
     delete_task,
@@ -109,7 +110,7 @@ def main():
         dump_json("tasks.json", data_json)
 
     elif args.subcommand == "list":
-        list_tasks(args.status)
+        make_table(args.status)
 
 
 if __name__ == "__main__":
