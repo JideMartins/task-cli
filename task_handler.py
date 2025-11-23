@@ -2,12 +2,10 @@
 import json
 from data_handler import convert_dictionary, dump_json, load_json, convert_json, now
 
-# define initial values
-data = load_json("tasks.json")
+# load data
+data = convert_json(load_json("tasks.json"))
 
 def add_task(description):
-    # TODO: Read file and open to fetch data
-    # TODO: if not file, create one and read data
     # if dictionary is empty, start at 1
     if not data:
         new_id = 1
