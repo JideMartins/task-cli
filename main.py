@@ -39,13 +39,25 @@ parser_update = subparsers.add_parser(
 parser_update.add_argument(
     "id",
     type=str,
-    help="The id of already existing task"
+    help="Task ID"
 )
 
 parser_update.add_argument(
     "description",
     type=str,
     help="Description update"
+)
+
+# 5. Define 'delete' subcommand
+parser_delete = subparsers.add_parser(
+    "delete",
+    help="Deletes task with known id"
+)
+
+parser_delete.add_argument(
+    "id",
+    type=str,
+    help="Task ID"
 )
 
 
