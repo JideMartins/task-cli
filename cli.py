@@ -91,8 +91,6 @@ def main():
     # parse arguments
     args = parser.parse_args()
 
-    print("--- TASK-CLI APPLICATION ---")
-
     # Use commands
     if args.subcommand == "add":
         data_json = add_task(args.description)
