@@ -84,26 +84,35 @@ parser_list.add_argument(
     help="Task status (optional: todo, done or in-progress). Default shows all.",
 )
 
-# parse arguments
-args = parser.parse_args()
 
 
-# Use commands
-if args.subcommand == "add":
-    data_json = add_task(args.description)
-    dump_json("tasks.json", data_json)
+# defining main
+def main():
+    # parse arguments
+    args = parser.parse_args()
 
-elif args.subcommand == "update":
-    data_json = update_task(args.id, args.description)
-    dump_json("tasks.json", data_json)
+    print("--- TASK-CLI APPLICATION ---")
 
-elif args.subcommand == "delete":
-    data_json = delete_task(args.id)
-    dump_json("tasks.json", data_json)
+    # Use commands
+    if args.subcommand == "add":
+        data_json = add_task(args.description)
+        dump_json("tasks.json", data_json)
 
-elif args.subcommand == "mark":
-    data_json = set_status(args.id, args.status)
-    dump_json("tasks.json", data_json)
+    elif args.subcommand == "update":
+        data_json = update_task(args.id, args.description)
+        dump_json("tasks.json", data_json)
 
-elif args.subcommand == "list":
-    list_tasks(args.status)
+    elif args.subcommand == "delete":
+        data_json = delete_task(args.id)
+        dump_json("tasks.json", data_json)
+
+    elif args.subcommand == "mark":
+        data_json = set_status(args.id, args.status)
+        dump_json("tasks.json", data_json)
+
+    elif args.subcommand == "list":
+        list_tasks(args.status)
+
+
+if __name__ == "__main__":
+    main()

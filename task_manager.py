@@ -1,4 +1,3 @@
-# update task
 import json
 from file_utils import load_json, convert_json, now
 
