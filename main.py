@@ -9,15 +9,15 @@ parser = ArgumentParser(description="CLI to track and manage your tasks")
 
 # 2. Add Subparser Container
 subparsers = parser.add_subparsers(
-    dest='subcommand',
-    required='True',
-    help='Sub-command help'
+    dest="subcommand",
+    required=True,
+    help="Sub-command help"
 )
 
 
-# 3. Add subcommand
+# 3. Define 'add' subcommand
 parsers_add = subparsers.add_parser(
-    'add',
+    "add",
     help="Adds task with description given"
 )
 
@@ -25,11 +25,28 @@ parsers_add = subparsers.add_parser(
 parsers_add.add_argument(
     "description",
     type=str,
-    help='Short description of task'
+    help="Short description of task"
 )
 
 
+# 4. Define 'update' subcommand
+parser_update = subparsers.add_parser(
+    "update",
+    help="Update task with ID and/or description"
+)
 
+# arguments specific to 'update' subcommand
+parser_update.add_argument(
+    "id",
+    type=str,
+    help="The id of already existing task"
+)
+
+parser_update.add_argument(
+    "description",
+    type=str,
+    help="Description update"
+)
 
 
 
