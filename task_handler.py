@@ -135,9 +135,27 @@ def list_tasks():
     if not data:
         print("There are no tasks to display:")
         print("   run add [description] to create new task")
+        return  # stop execution if there are no tasks
 
-    # list of tasks
-    for id in data:
-        for key, value in data[id].items():
-            print(f"{key:<4}:{value}")
-        print("-" * 30)
+    for id, task_details in data.items():
+        print(f"Task ID: {id}")
+
+        # Iterate over task_details dictionary
+
+        for key, value in task_details.items():
+            print(f"  {key:>12}: {value}")
+        print("-" * 40)
+
+
+def filter_task(status):
+    if not data:
+        print("There are no tasks to display:")
+        print("   run add [description] to create new task")
+        return
+    for id, task_details in data.items():
+        print(f"Task ID: {id}")
+
+    for key, value in task_details.items():
+        if task_details["status"] == status:
+            print(f"  {key:>12}: {value}")
+        print("-" * 40)
