@@ -5,55 +5,84 @@
 
 **Task CLI** is a simple, lightweight, and cross-platform command-line interface tool for managing your daily to-dos right from your terminal. Stop switching apps—track, update, and organize your tasks with simple commands\!
 
+
 -----
 
 ## 🛠️ Installation
 
-Because Task CLI is packaged using `setuptools`, installation is a breeze 😉 using `pip`.
+Because Task CLI is packaged using `setuptools`, installation is a breeze 😉 using `pip`. This guide covers platform differences (e.g., using `python3` vs. `python` on Linux).
 
-### 1\. Clone the Repository
+### 1\. Prerequisites (Linux Only)
+
+If you are on a **Linux** distribution like Ubuntu, you may need to install the virtual environment tool and ensure you have `pip` available globally.
+
+```bash
+# This command installs the necessary system tools for Python 3
+sudo apt update
+sudo apt install python3 python3-pip python3-venv
+```
+
+### 2\. Clone the Repository
 
 ```bash
 git clone https://github.com/JideMartins/task-cli.git
 cd task-cli
 ```
 
-### 2\. Activate Virtual Environment (Crucial Step‼️)
+### 3\. Activate Virtual Environment (Crucial Step‼️) 
 
-For best practice, always install CLI tools in a virtual environment. This step **must** be performed every time you open a new terminal session to run the `tsk` command.
+This step **must** be performed every time you open a new terminal session to run the `tsk` command. The command you use depends on your OS:
 
 ```bash
-# Create the environment
-python -m venv .venv
 
-# Run the activation script based on your operating system:
-source .venv/bin/activate    # 🐧 For macOS and Linux
-.\.venv\Scripts\activate     # 🪟 For Windows Command Prompt (cmd)
-.\.venv\Scripts\Activate.ps1 # 🪟 For Windows PowerShell
+
+# 1. Create the environment (Use the command that works on your system)
+python3 -m venv .venv  # 🐧 Recommended for Linux/macOS
+python -m venv .venv   # 🪟 Recommended for Windows
+
+# 2. Run the activation script based on your OS/Shell:
+source .venv/bin/activate      # 🐧 For macOS and Linux Shells (Bash/Zsh)
+.\.venv\Scripts\Activate.ps1   # 🪟 For Windows PowerShell
+.\.venv\Scripts\activate       # 🪟 For Windows Command Prompt (cmd)
+
 ```
 
-> **Note:** After activation, your terminal prompt should start with `(.venv)`. This confirms that the system can now find the `tsk` executable.
+> **Note on Python Command:** If `python` gives a "command not found" error, use **`python3`** instead.
 
-### 3\. Install the Application
+### 4\. Install Dependencies & Application
 
-Install the package locally using `pip`. This makes the `tsk` command available *within the active virtual environment*.
+Task CLI requires the `tabulate` library for visualization, which we install before the application itself.
 
 ```bash
+# Install tabulate (for visual tables)
+pip install tabulate
+
+# Install the application locally. This makes the 'tsk' command available.
 pip install .
 ```
 
-### 4\. Verify Installation
+### 5\. Verify Installation
 
-After installation, immediately test the command to ensure it's recognized.
+After installation, immediately test the command.
 
 ```bash
 tsk --help
 ```
 
   * **Expected Result:** The help documentation for the Task CLI is displayed.
-  * **If you get an error like 'tsk' is not recognized:** This means you missed or failed the **Activation Step (Step 2)**. Please run the correct activation command for your OS and try again.
+  * **If you get an error like 'tsk' is not recognized:** This means you missed the **Activation Step (Step 3)**. Please ensure your prompt starts with `(.venv)`.
 
 -----
+
+## 🆘 Troubleshooting Quick Fixes
+
+| Error Encountered | Cause | Solution |
+| :--- | :--- | :--- |
+| **`python` command not found** | Linux uses `python3` as the main command, not `python`. | Use **`python3`** instead of `python`. |
+| **`ensurepip is not available... install python3-venv`** | The core `venv` module requires an additional system package on Ubuntu/Debian. | Run: `sudo apt install python3-venv` |
+| **`E: Could not open lock file... Permission denied`** | `apt install` requires root (administrator) privileges. | Use **`sudo`** before the `apt install` command. |
+---------------------
+
 
 ## 💡 Quick Start & Usage
 
